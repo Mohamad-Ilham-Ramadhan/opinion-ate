@@ -1,0 +1,1 @@
+- small, focused commits make it easier for other developers to review, and keep us accountable to really understanding what is changing in our code.
