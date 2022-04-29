@@ -20,3 +20,14 @@
 - Why did we split this unit test out from the first one? There is a common testing principle to check one behavior per test in unit tests.
 
 - "run one expectation per test"
+
+- Refactor: 
+  In the TDD cycle, whenever the tests go green, look for opportunities to refactor, both in production code and test code. Our production code is pretty simple already, but there's a lot of duplication in our two tests
+
+- Another benefit of testing the store from the outside is ensuring that all the pieces work together. If we were testing the loadRestaurants async action, storeRestaurants action creator, and reducer separately from one another, they might work individually, but not work together.
+
+- Now, why didn't we unit test this API? We could set it up to pass in a fake Axios object and mock out the get() method on it. But there is a unit testing principle: don't mock what you don't own. The principle applies equally well to using any kind of test doubles for code you don't own, not just mocks. There are a few reasons for this:
+
+  - If you mock third party code but you get the functionality wrong, then your tests will pass against your mock, but won't work against the real third-party library. This is especially risky when the behavior of the library changes from how it worked when you first wrote the test.
+
+  - Some of the value of unit tests is in allowing you to design the API of your dependencies, but since you can't control the API of the third-party library, you don't get the opportunity to affect the API. (Pull requests to open-source projects notwithstanding!)

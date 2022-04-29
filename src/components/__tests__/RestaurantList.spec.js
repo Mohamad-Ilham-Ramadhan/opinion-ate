@@ -1,28 +1,27 @@
 import {render, screen} from '@testing-library/react';
 import {RestaurantList} from '../RestaurantList'; // Be sure to use the named import import {RestaurantList} with curly braces, not the default import import RestaurantList. The named import will continue to be the component that is not connected to Redux, which is the one we want to unit test. If you use the default import, then once we connect it to Redux your unit test will begin failing.
 describe('RestaurantList', () => {
-  it('loads restaurants on first render', () => {
-    const loadRestaurants = jest.fn().mockName('loadRestaurants'); // .mockName() to give our mock function a name to make our error messages more readable.
-    const restaurants = [];
+  const restaurants = [
+    {id: 1, name: 'Sushi Place'},
+    {id: 2, name: 'Pizza Place'},
+  ];
+  let loadRestaurants;
+
+  beforeEach(() => {
+    loadRestaurants = jest.fn().mockName('loadRestaurants'); // .mockName() to give our mock function a name to make our error messages more readable.
+
     render(
       <RestaurantList
         loadRestaurants={loadRestaurants}
         restaurants={restaurants}
       />,
     );
-
+  });
+  it('loads restaurants on first render', () => {
     expect(loadRestaurants).toHaveBeenCalled();
   });
 
   it('display the restaurants', () => {
-    const noop = () => {};
-    const restaurants = [
-      {id: 1, name: 'Sushi Place'},
-      {id: 2, name: 'Pizza Place'},
-    ];
-
-    render(<RestaurantList loadRestaurants={noop} restaurants={restaurants} />);
-
     expect(screen.queryByText('Sushi Place')).not.toBeNull();
     expect(screen.queryByText('Pizza Place')).not.toBeNull();
   });
