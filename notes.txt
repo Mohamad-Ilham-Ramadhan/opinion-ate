@@ -1,1 +1,33 @@
 - small, focused commits make it easier for other developers to review, and keep us accountable to really understanding what is changing in our code.
+
+- Vertical Slice: 
+  We chose this story as our first story because it allows us to build out a vertical slice of our application. It touches all layers of our code: it has a user interface aspect (the list screen), a data layer aspect (where the restaurants are loaded and stored), and an API client aspect (the HTTP request to load the restaurants). It also minimizes other work: we aren't building authentication now, and we aren't handling restaurant loading edge cases yet in this story. The point of a vertical slice is to get something in all layers of your application built out, to ensure they all work together.
+
+- outside-in testing: 
+  With outside-in testing, we build the outside first, which in this case is our user interface components
+
+- Write the code you wish you had: 
+  And a common principle is to write the code you wish you had. What does that mean in our case? Well, when we created our app, we were given an <App /> component. Do we want to put our user interface directly in there? No, it's best to save the <App /> component for app-wide concerns such as a title bar that we'll add soon. Instead, it would be great if we had a <RestaurantScreen /> component that would contain everything specific to our restaurants. We wish we had it, so let's add it to App.js
+
+- unit tests: 
+  unit tests are for driving out logic. This is why we wrote this structural code directly under the guidance of the E2E test.
+
+- End-to-end testing every edge case would be slow
+
+- Di dalem file testing: 
+  Be sure to use the named import import {RestaurantList} with curly braces, not the default import import RestaurantList. The named import will continue to be the component that is not connected to Redux, which is the one we want to unit test. If you use the default import, then once we connect it to Redux your unit test will begin failing.
+
+- Why did we split this unit test out from the first one? There is a common testing principle to check one behavior per test in unit tests.
+
+- "run one expectation per test"
+
+- Refactor: 
+  In the TDD cycle, whenever the tests go green, look for opportunities to refactor, both in production code and test code. Our production code is pretty simple already, but there's a lot of duplication in our two tests
+
+- Another benefit of testing the store from the outside is ensuring that all the pieces work together. If we were testing the loadRestaurants async action, storeRestaurants action creator, and reducer separately from one another, they might work individually, but not work together.
+
+- Now, why didn't we unit test this API? We could set it up to pass in a fake Axios object and mock out the get() method on it. But there is a unit testing principle: don't mock what you don't own. The principle applies equally well to using any kind of test doubles for code you don't own, not just mocks. There are a few reasons for this:
+
+  - If you mock third party code but you get the functionality wrong, then your tests will pass against your mock, but won't work against the real third-party library. This is especially risky when the behavior of the library changes from how it worked when you first wrote the test.
+
+  - Some of the value of unit tests is in allowing you to design the API of your dependencies, but since you can't control the API of the third-party library, you don't get the opportunity to affect the API. (Pull requests to open-source projects notwithstanding!)
