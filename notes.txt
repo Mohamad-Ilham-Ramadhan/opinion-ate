@@ -31,3 +31,11 @@
   - If you mock third party code but you get the functionality wrong, then your tests will pass against your mock, but won't work against the real third-party library. This is especially risky when the behavior of the library changes from how it worked when you first wrote the test.
 
   - Some of the value of unit tests is in allowing you to design the API of your dependencies, but since you can't control the API of the third-party library, you don't get the opportunity to affect the API. (Pull requests to open-source projects notwithstanding!)
+
+- Click the link that GitHub provides to open a pull request. Title the pull request "List restaurants". You can leave the description field blank for this exercise; in a real team context you would describe the change you made, how to manually test it, and other important information about decisions or tradeoffs you made.
+
+- In a team context, your team members would review the pull request. They can click on lines of code to add comments. When reviewing a pull request, don't just point out things you want changed. Ask questions to better understand the author's intent. Encourage them about decisions they made that you like or have learned from. Make proposals for changes that you don't feel strongly about, so the author can choose which way to go. All of these create a code review culture that feels encouraging and motivating.
+
+- When you open the pull request, you can see CI running at the bottom. If it fails, click "Details" and check the output to see what went wrong. Try running the tests locally to see if you get the same problem, then fix it and push up the fixes.
+
+
