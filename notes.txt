@@ -51,3 +51,11 @@
   All those downsides turn folks off from TDD before they try it, or give people who do try it a bad experience.
 
   Instead, keep your component tests focused on the behavior of the component, and leave the details of the markup and styling as implementation details.
+
+- You could theoretically write an E2E test for this functionality, confirming the loading indicator and error message appear at the appropriate times. But if you write too many E2E tests, your application's test suite will get slow. Over time, you'll run it less and less frequently locally, and slow CI runs will slow down your ability to merge PRs.
+
+- To prevent this from happening, it's best to write fewer E2E tests and more unit tests—and outside-in TDD provides guidance in how many of each to write. You write an E2E test for each main flow of your application, as well as the unit tests to help implement it. Then, for more detailed or edge-case functionality, you only write the unit tests. In our case, the loading indicator and error message can be considered more detailed functionality. So we are still going to TDD them, but only at the unit level.
+
+- If you find elements by an ID or CSS class name, those values might change for other reasons in your application, resulting in tests breaking. But since a test ID is specifically used for testing, it should be more stable and less likely to change for reasons unrelated to the test.
+
+- We fix this failing test the simplest way possible
