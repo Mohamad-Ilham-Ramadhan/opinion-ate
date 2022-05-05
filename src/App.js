@@ -1,12 +1,11 @@
 import {Provider} from 'react-redux';
-import {createTheme} from '@material-ui/core/styles';
-import green from '@material-ui/core/colors/green';
-import {ThemeProvider} from '@material-ui/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
+import {createTheme, ThemeProvider} from '@mui/material/styles';
+import green from '@mui/material/colors/green';
+import CssBaseline from '@mui/material/CssBaseline';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
 import store from './store';
 import RestaurantScreen from './components/RestaurantScreen';
 

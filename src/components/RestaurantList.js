@@ -1,17 +1,28 @@
 import {useEffect} from 'react';
 import {connect} from 'react-redux';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import CircularProgress from '@mui/material/CircularProgress';
+import Alert from '@mui/material/Alert';
+
 import {loadRestaurants} from '../store/restaurants/actions';
 
-export const RestaurantList = ({loadRestaurants, restaurants}) => {
+export const RestaurantList = ({
+  loadRestaurants,
+  restaurants,
+  loading,
+  loadError,
+}) => {
   useEffect(() => {
     loadRestaurants();
   }, [loadRestaurants]);
   return (
-    <div>
-      <div>Restaurants</div>
+    <>
+      {loading && <CircularProgress data-testid="loading-indicator" />}
+      {loadError && (
+        <Alert severity="error">Restaurants could not be loaded.</Alert>
+      )}
       <List>
         {restaurants.map(restaurant => (
           <ListItem key={restaurant.id}>
@@ -19,13 +30,14 @@ export const RestaurantList = ({loadRestaurants, restaurants}) => {
           </ListItem>
         ))}
       </List>
-    </div>
+    </>
   );
 };
 const mapDispatchToProps = {loadRestaurants};
 const mapStateToProps = state => ({
   restaurants: state.restaurants.records,
-  loadRestaurants: () => {},
+  loading: state.restaurants.loading,
+  loadError: state.restaurants.loadError,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RestaurantList);
