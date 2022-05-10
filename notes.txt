@@ -59,3 +59,7 @@
 - If you find elements by an ID or CSS class name, those values might change for other reasons in your application, resulting in tests breaking. But since a test ID is specifically used for testing, it should be more stable and less likely to change for reasons unrelated to the test.
 
 - We fix this failing test the simplest way possible
+
+- Remember, we don't unit test our API, so we can implement this method directly, driven by the E2E test.
+
+- Edge case di unit test, E2E test untuk main functionality aja.

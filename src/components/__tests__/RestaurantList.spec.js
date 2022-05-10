@@ -1,5 +1,4 @@
 import {render, screen} from '@testing-library/react';
-import {scryRenderedComponentsWithType} from 'react-dom/test-utils';
 import {RestaurantList} from '../RestaurantList'; // Be sure to use the named import import {RestaurantList} with curly braces, not the default import import RestaurantList. The named import will continue to be the component that is not connected to Redux, which is the one we want to unit test. If you use the default import, then once we connect it to Redux your unit test will begin failing.
 describe('RestaurantList', () => {
   const restaurants = [

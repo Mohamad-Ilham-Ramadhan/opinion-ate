@@ -50,6 +50,7 @@
     ]
   },
   "devDependencies": {
-    "cypress": "9.5.4"
+    "cypress": "9.5.4",
+    "flush-promises": "1.0.2"
   }
 }
