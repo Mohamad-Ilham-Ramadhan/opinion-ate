@@ -3,10 +3,13 @@ import {
   START_LOADING,
   STORE_RESTAURANTS,
   RECORD_LOADING_ERROR,
+  ADD_RESTAURANT,
 } from './actions';
 
 const records = (state = [], action) => {
   switch (action.type) {
+    case ADD_RESTAURANT:
+      return [...state, action.record];
     case STORE_RESTAURANTS:
       return action.records;
     default:

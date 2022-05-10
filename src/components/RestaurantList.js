@@ -20,9 +20,6 @@ export const RestaurantList = ({
   return (
     <>
       {loading && <CircularProgress data-testid="loading-indicator" />}
-      {loadError && (
-        <Alert severity="error">Restaurants could not be loaded.</Alert>
-      )}
       <List>
         {restaurants.map(restaurant => (
           <ListItem key={restaurant.id}>
@@ -30,6 +27,9 @@ export const RestaurantList = ({
           </ListItem>
         ))}
       </List>
+      {loadError && (
+        <Alert severity="error">Restaurants could not be loaded.</Alert>
+      )}
     </>
   );
 };
